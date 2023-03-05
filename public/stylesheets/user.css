@@ -1,0 +1,39 @@
+.profile { width: 35% }
+.avatar {
+    width: 200px;
+    height: 200px;
+}
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#input-old-password {
+    margin-bottom: 3px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+} 
+#input-new-password {
+    margin-bottom: 3px;
+    border-radius: 0;
+}
+#input-new-password-confirm {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* CSS media query */
+/* 600px < size <= 1200px */ 
+@media(max-width: 1200px) {
+    .profile {
+        width: 50%;
+    }
+}
+/* Mobile: 360px < size <= 600px */ 
+@media(max-width: 600px) {
+    .profile {
+        width: 90%;
+    }
+}

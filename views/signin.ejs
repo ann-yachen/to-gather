@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in to TO-GATHER</title>
+    <%- include('./partials/css'); %>
+    <link href="../stylesheets/signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+    <main class="form-signin">
+        <h1 class="h3 mb-3 fw-normal">Sign in to TO-GATHER</h1>
+        <div id="signin-form">
+            <div class="form-floating">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com" value="test@test.com"/>
+                <label for="floatingInput">Email Address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="password" placeholder="Password" value="test"/>
+                <label for="floatingPassword">Password</label>
+            </div>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" id="sign-in" type="submit">Sign in</button>
+        <div>
+            New to TO-GATHER? <a href="/signup">Create an account</a>.
+        </div>
+        <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+    </main>
+    <div class="alert d-flex align-items-center position-absolute top-0 start-50 translate-middle-x my-4" role="alert"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script type="module">
+        import { init } from '/javascripts/signin.js';
+        init();
+    </script>
+</body>
+</html>
