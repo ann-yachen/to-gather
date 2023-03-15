@@ -90,14 +90,12 @@ async function uploadAvatar(req, res) {
                         const data = { avatar: user.avatar };
                         res.status(200).json({ data: data });
                     } catch(err) {
-                        console.log('S3: ', err);
                         res.status(500).json({ error: true, message: err });
                     }
                 } else {
                     res.status(400).json({ error: true, message: 'User does not exist.' });
                 }
             } catch(err) {
-                console.log('Mongoose: ', err);
                 res.status(500).json({ error: true, message: err });
             }            
         } else {
