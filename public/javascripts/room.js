@@ -67,7 +67,6 @@ async function init() {
             userData.name = result.data.name;
             userData.avatar = result.data.avatar;
 
-            joinRoom();
             startVideoCall();
 
             /* For texting message */
@@ -83,16 +82,19 @@ async function init() {
     }
 }
 
-function joinRoom() {
-    socket.emit('joinRoom', ROOM, userData);
-    socket.on('updateUserId', (id) => {
-        userData.id = id; // Get socket id
-    });
-}
-
 // ###################################################
 // VIDEO CALL
 // ###################################################
+
+function createVideo(video, stream, user) {
+    video.classList.add('position-absolute', 'bottom-0', 'start-0');
+    video.setAttribute('id', user.peer);
+    video.setAttribute('style', 'display: block;');
+    video.srcObject = stream;
+    video.autoplay = true;
+    video.playsInline = true;
+    return video;
+}
 
 function createVideoContainer(user) {
     const div = document.createElement('div');
@@ -150,42 +152,35 @@ function resizeVideoContainer() {
     }
 }
 
-function createVideo(video, stream, user) {
-    video.classList.add('position-absolute', 'bottom-0', 'start-0');
-    video.setAttribute('id', user.peer);
-    video.setAttribute('style', 'display: block;');
-    video.srcObject = stream;
-    video.autoplay = true;
-    video.playsInline = true;
-    return video;
-}
-
 async function startVideoCall() {
     try {
         localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true, echoCancellation: true });
         userData.audio = true;
-        socket.emit('updateStream', 'audio', true);
         userData.video = true;
-        socket.emit('updateStream', 'video', true);
 
         /* For peer connect */
         const peer = new Peer(); // Create peer object
-
-        /* Update peer id */
         peer.on('open', (id) => {
-            userData.peer = id; // Get peer id and record
-            socket.emit('updatePeer', id); // Send to others
+            userData.peer = id;
 
-            /* Create local video */
+            /* Join room */
+            socket.emit('joinRoom', ROOM, userData);
+
+            /* Get socket id */
+            socket.on('updateUserId', (id) => {
+                userData.id = id;
+            });
+
+            /* Create local video and container */
             const video = document.createElement('video');
             const localVideo = createVideo(video, localStream, userData);
             localVideo.muted = true;
 
-            /* Create local vidoe container */
             const localVideoContainer = createVideoContainer(userData);
             localVideoContainer.appendChild(localVideo);
             document.getElementById('videos').appendChild(localVideoContainer);
 
+            /* Add eventlistener for controls */
             micBtn.addEventListener('click', toggleMic);
             cameraBtn.addEventListener('click', toggleCamera);
             leaveBtn.addEventListener('click', () => { location.href='/'; });
@@ -247,7 +242,6 @@ async function startVideoCall() {
             });
         });
     } catch(err) {
-        console.log(err.name, err.message);
         document.getElementById('loading').innerHTML = `<div><h3>Cannot Get Your Stream</h3>
         <div>Please check your device then try again</div></div>`;
     }

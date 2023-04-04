@@ -50,8 +50,6 @@ function sendTextMessage() {
 }
 
 function showMessage(message) {
-    console.log(message);
-
     if(message.name === 'system') { // Show user join or leave
         document.getElementById('user-message').textContent = message.text;
         const toastNode = document.querySelector('.toast');

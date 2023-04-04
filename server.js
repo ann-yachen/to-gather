@@ -12,26 +12,14 @@ io.on('connection', (socket) => {
         const user = createUser(socket.id, room, userData);
 
         socket.join(user.room);
+        
+        socket.to(user.room).emit('message', formatMessage('system', `${user.name} has joined the room`));
+        socket.to(user.room).emit('peerConnect', user);
 
         socket.emit('updateUserId', user.id);
-        socket.to(user.room).emit('message', formatMessage('system', `${user.name} has joined the room`));
         
         const roomUsers = getUsersInRoom(user.room);
         io.to(user.room).emit('roomUsers', roomUsers);
-    });
-
-    /* Update status after getUserMedia  */
-    socket.on('updateStream', (param, value) => {
-        const user = updateUser(socket.id, param, value);
-    });
-
-    /* Update peer id */
-    socket.on('updatePeer', (id) => {
-        const user = updateUser(socket.id, 'peer', id);
-
-        if(user) {
-            socket.to(user.room).emit('peerConnect', user);
-        }
     });
 
     /* Toggle audio or video */
