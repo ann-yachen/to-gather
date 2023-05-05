@@ -2,14 +2,16 @@
 
 [https://to-gather.net/](https://to-gather.net/)
 
-TO-GATHER provides real-time online video conference with texting service.
+Real-time online video conference with texting and whiteboard service.
+
+![](https://i.imgur.com/A9AeYkR.jpg)
 
 ## Test User
 Account: test@test.com / Password: test
 
 ## Features
 * Real-time online video conference by WebRTC
-* Real-time texting and drawing
+* Real-time texting and whiteboard drawing
 
 ## Technologies
 
@@ -30,8 +32,9 @@ Account: test@test.com / Password: test
 * Nginx
 
 ## Architecture
-![](https://i.imgur.com/0po3kEJ.png)
+![](https://github.com/ann-yachen/to-gather/blob/main/to-gather-architecture.png)
 
 ## Contact
 👩🏻‍💻 Yu-An Chen
+
 📧 Email: yachen877@gmail.com
