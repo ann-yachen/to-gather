@@ -35,6 +35,5 @@ Account: test@test.com / Password: test
 ![](https://github.com/ann-yachen/to-gather/blob/main/to-gather-architecture.png)
 
 ## Contact
-👩🏻‍💻 Yu-An Chen
-
+👩🏻‍💻 Yu-An Chen  
 📧 Email: yachen877@gmail.com
